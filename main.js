@@ -1,13 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
   const screen = document.querySelector("#screen");
+  const resetBtn = document.querySelector("#reset-button");
 
+  resetBtn.addEventListener("click", () => {
+    resetScreen(screen);
+  });
+
+  // **functions for pixelating the #screen**
   // event handler for mouseover event
   function darkenPixel(pixel) {
     const opacityValue = Number(pixel.style.opacity);
     pixel.style.opacity = opacityValue < 1 ? `${opacityValue + 0.25}` : "1";
   }
 
-  // create array of pixels equal to dimension of #screen
   function makePixels(dimension) {
     const pixelArray = [];
 
@@ -26,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return pixelArray;
   }
 
-  // create array of rows equal to dimension of #screen
   function makeRows(dimension) {
     const rowArray = [];
 
@@ -43,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return rowArray;
   }
 
-
   function pixelateScreen(dimension) {
       const rows = makeRows(dimension);
       rows.forEach(row => {
@@ -51,14 +54,31 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-  /*
-  function setScreen(selectedScreen) {
-
+  // **functions for resetting the #screen**
+  function removePixels(row) {
+    const pixels = row.querySelectorAll(".pixel");
+    pixels.forEach(pixel => {
+      row.removeChild(pixel);
+    });
   }
 
-  function resetScreen(selectedScreen) {
-
+  function removeRows(screen) {
+    const rows = screen.querySelectorAll(".row");
+    rows.forEach(row => {
+      screen.removeChild(row);
+    });
   }
-  */
-  pixelateScreen(64);
+
+  function requestDimensions() {
+    return prompt("Enter the desired number of pixels per side (64 or fewer recommended):");
+  }
+
+  function resetScreen(screen) {
+    const dimension = requestDimensions()
+    removeRows(screen);
+    pixelateScreen(dimension);
+  }
+
+  // create initial #screen with 16 x 16 dimensions
+  pixelateScreen(16);
 })
