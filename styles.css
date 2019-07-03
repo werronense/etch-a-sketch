@@ -60,6 +60,7 @@ header {
 }
 
 #screen {
+  background-color: lightgray;
   display: flex;
   flex-direction: column;
   height: 90vh;
@@ -73,6 +74,5 @@ header {
 }
 
 .pixel {
-  background-color: gray;
   flex: 1;
 }
