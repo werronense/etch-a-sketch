@@ -63,16 +63,26 @@ header {
 }
 
 header > div {
+  display: flex;
   margin: 0 auto;
   padding-top: 1.5vh;
   width: 85vh;
+}
+
+header h1 {
+  color: #f8fb55;
+  font-size: 2em;
+}
+
+header span {
+  flex: 1;
 }
 
 header button {
   background-color: #f8fb55;
   border: 3px solid #fbc655;
   border-radius: 5px;
-  color: #fbc655;
+  color: #590281;
   letter-spacing: 0.2em;
   padding: 0.5em 2em 0.5em 2em;
 }
