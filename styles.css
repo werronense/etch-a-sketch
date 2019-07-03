@@ -60,7 +60,19 @@ header {
 }
 
 #screen {
+  display: flex;
+  flex-direction: column;
   height: 90vh;
   margin: 0 auto;
   width: 90vh;
+}
+
+.row {
+  display: flex;
+  flex: 1;
+}
+
+.pixel {
+  background-color: gray;
+  flex: 1;
 }
