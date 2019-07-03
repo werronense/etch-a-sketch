@@ -3,10 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // event handler for mouseover event
   function darkenPixel(pixel) {
-    console.log(pixel.getAttribute("opacity"));
+    const opacityValue = Number(pixel.style.opacity);
+    pixel.style.opacity = opacityValue < 1 ? `${opacityValue + 0.25}` : "1";
   }
 
-
+  // create array of pixels equal to dimension of #screen
   function makePixels(dimension) {
     const pixelArray = [];
 
@@ -14,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const newPixel = document.createElement("div");
       newPixel.classList.add("pixel");
 
-      newPixel.setAttribute("background", "gray");
-      newPixel.setAttribute("opacity", "0");
+      newPixel.style.backgroundColor = "gray";
+      newPixel.style.opacity = "0";
 
       newPixel.addEventListener("mouseover", e => {
         darkenPixel(e.target);
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return pixelArray;
   }
 
-
+  // create array of rows equal to dimension of #screen
   function makeRows(dimension) {
     const rowArray = [];
 
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return rowArray;
   }
 
-
+  
   function pixelateScreen(dimension) {
       const rows = makeRows(dimension);
       rows.forEach(row => {
