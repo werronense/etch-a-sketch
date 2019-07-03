@@ -1,33 +1,55 @@
 document.addEventListener("DOMContentLoaded", () => {
   const screen = document.querySelector("#screen");
 
-  function  darkenPixel(pixel) {
+  // event handler for mouseover event
+  function darkenPixel(pixel) {
     console.log(pixel.getAttribute("opacity"));
   }
 
-  function generatePixels(dimension) {
+
+  function makePixels(dimension) {
+    const pixelArray = [];
+
+    for (j = 0; j < dimension; j++) {
+      const newPixel = document.createElement("div");
+      newPixel.classList.add("pixel");
+
+      newPixel.setAttribute("background", "gray");
+      newPixel.setAttribute("opacity", "0");
+
+      newPixel.addEventListener("mouseover", e => {
+        darkenPixel(e.target);
+      });
+      pixelArray.push(newPixel);
+    }
+    return pixelArray;
+  }
+
+
+  function makeRows(dimension) {
+    const rowArray = [];
+
     for (i = 0; i < dimension; i++) {
       const newRow = document.createElement("div");
-
       newRow.classList.add("row");
 
-      for (j = 0; j < dimension; j++) {
-        const newPixel = document.createElement("div");
-        newPixel.classList.add("pixel");
-
-        newPixel.setAttribute("background", "gray");
-        newPixel.setAttribute("opacity", "0");
-
-        newPixel.addEventListener("mouseover", e => {
-          darkenPixel(e.target);
-        });
-        
-        newRow.appendChild(newPixel);
-      }
-
-      screen.appendChild(newRow);
+      const pixels = makePixels(dimension);
+      pixels.forEach(pixel => {
+        newRow.appendChild(pixel);
+      });
+      rowArray.push(newRow);
     }
+    return rowArray;
   }
+
+
+  function pixelateScreen(dimension) {
+      const rows = makeRows(dimension);
+      rows.forEach(row => {
+        screen.appendChild(row);
+      });
+    }
+
   /*
   function setScreen(selectedScreen) {
 
@@ -37,5 +59,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
   */
-  generatePixels(16);
+  pixelateScreen(16);
 })
