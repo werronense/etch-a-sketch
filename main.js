@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return rowArray;
   }
 
-  
+
   function pixelateScreen(dimension) {
       const rows = makeRows(dimension);
       rows.forEach(row => {
@@ -60,5 +60,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
   */
-  pixelateScreen(16);
+  pixelateScreen(64);
 })
